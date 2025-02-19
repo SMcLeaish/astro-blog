@@ -1,0 +1,7 @@
+---
+const { messages = ['Howdy']} = Astro.props;
+---
+
+<div x-data="greeting(['Howdy'])">
+  <span x-text="message"></span> 
+</div>
