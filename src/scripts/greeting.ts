@@ -3,7 +3,7 @@ export const greeting = (messages: Array<string>) => {
     messages[Math.floor(Math.random() * messages.length)];
   return {
     message: randomMessage(),
-    new() {
+    refresh() {
       this.message = randomMessage();
     },
   };
