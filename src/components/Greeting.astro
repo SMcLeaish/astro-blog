@@ -4,5 +4,5 @@ const { messages = ['Howdy']} = Astro.props;
 
 <div x-data={`greeting(${JSON.stringify(messages)})`}>
   <span x-text="message"></span> 
-  <button @click="refresh">New</button>
+  <button @click="refresh" class="btn btn-secondary" >New</button>
 </div>
