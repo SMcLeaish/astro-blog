@@ -4,11 +4,11 @@ pubDate: 2025-02-16
 description: "This is my first post"
 author: "SMC"
 image:
-  url: "https://docs.astro.build/assets/rose.webp"
+  url: ../assets/2025-08-02-qemu_running.png
   alt: "Picture of the Astro logo"
 tags: ["astro", "blogging", "learning in public"]
 ---
-
+![A running qemu instance](../assets/2025-08-02-qemu_running.png)
 Welcome to my _new blog_ about learning Astro! Here, I will share my learning
 journey as I build a new website.
 
