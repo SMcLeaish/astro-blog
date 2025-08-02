@@ -1,17 +1,11 @@
 @import "tailwindcss";
+
 @plugin "daisyui" {
   themes: winter, coffee, dracula, cyberpunk;
 }
+
 html {
   font-family: sans-serif;
-}
-
-body {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 80ch;
-  padding: 1rem;
-  line-height: 1.5;
 }
 
 * {
@@ -36,6 +30,7 @@ h1 {
   margin-bottom: 10px;
   background-color: #ff9776;
 }
+
 .nav-links {
   width: 100%;
   top: 5rem;
@@ -77,6 +72,7 @@ h1 {
     display: inline-block;
     padding: 15px 20px;
   }
+
   .hamburger {
     display: none;
   }

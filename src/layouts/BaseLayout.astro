@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ThemeIcon from '../components/ThemeIcon.astro';
 import '../styles/global.css';
 const { pageTitle } = Astro.props;
 ---
@@ -12,7 +13,8 @@ const { pageTitle } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
   </head>
-  <body>
+  <ThemeIcon />
+  <main class="max-w-prose mx-auto px-4 py-6 leading-relaxed bg-base-100 text-base-content">
     <Header />
     <h1>{pageTitle}</h1>
     <slot />
@@ -22,5 +24,5 @@ const { pageTitle } = Astro.props;
         document.querySelector(".nav-links")?.classList.toggle("expanded");
       });
     </script>
-  </body>
+  </main>
 </html>
