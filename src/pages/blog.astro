@@ -9,7 +9,14 @@ const allPosts = await getCollection("blog");
   <p>This is where I'll be learning stuff</p>
   <ul>
     {allPosts.map((post: any) => (
-    <BlogPost url={`/posts/${post.id}`} title={post.data.title} />))}
+    <BlogPost url={`/posts/${post.id}`}
+    image={post.data.image.url}
+    altText={post.data.image.alt}
+    date={post.data.pubDate.toLocaleDateString()}
+    title={post.data.title}
+    description={post.data.description}
+     />))}
+
   </ul>
 </BaseLayout>
 

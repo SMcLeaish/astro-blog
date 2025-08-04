@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* stylelint-disable-next-line at-rule-no-unknown */
 @plugin "daisyui" {
   themes: winter, coffee, dracula, cyberpunk;
 }
@@ -52,7 +53,7 @@ h1 {
 
 .nav-links a:hover,
 .nav-links a:focus {
-  background-color: #ff9776;
+  @apply bg-secondary text-secondary-content;
 }
 
 .expanded {
