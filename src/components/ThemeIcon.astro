@@ -8,7 +8,6 @@ const icons = {
   <div class="sun fill-current" fill-rule="evenodd" set:html={icons.sun}></div>
   <div class="moon fill-current" fill-rule="evenodd" set:html={icons.moon}></div>
 </button>
-
 <style>
 #themeToggle {
   border: 0;
@@ -21,10 +20,21 @@ const icons = {
 .moon {
   position: relative;
 }
-.moon { display: none; }
-.sun { display: block }
-:global(.dark) .sun { display: none; }
-:global(.dark) .moon { display: block; }
+
+.moon {
+  display: none;
+}
+
+.sun {
+  display: block
+}
+
+:global(.dark) .sun {
+  display: none;
+}
+
+:global(.dark) .moon {
+  display: block;
 </style>
 <script is:inline>
 const themes = {
