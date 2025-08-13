@@ -1,7 +1,7 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Navigation from '../components/Navigation.astro'
 import ThemeIcon from '../components/ThemeIcon.astro';
+import Social from '../components/Social.astro';
 import '../styles/global.css';
 const { pageTitle } = Astro.props;
 ---
@@ -13,18 +13,18 @@ const { pageTitle } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
   </head>
-  <body class="bg-base-200">
+  <body class="bg-base-200 min-h-screen flex flex-col">
   <ThemeIcon />
-  <main class="max-w-2xl mx-auto px-4 py-6 leading-relaxed bg-base-100 text-base-content">
-    <Header />
+  <main class="flex-grow w-full max-w-4xl mx-auto p-6 bg-base-100 text-base-content">
+    <Navigation />
     <h1>{pageTitle}</h1>
     <slot />
-    <Footer />
     <script>
       document.querySelector(".hamburger")?.addEventListener("click", () => {
-        document.querySelector(".nav-links")?.classList.toggle("expanded");
+        document.querySelector(".nav-links")?.classList.toggle("hidden");
       });
     </script>
   </main>
+  <Social />
   </body>
 </html>

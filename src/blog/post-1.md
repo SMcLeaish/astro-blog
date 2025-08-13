@@ -1,29 +1,25 @@
 ---
-title: "First Post"
-pubDate: 2025-02-16
-description: "This is my first post"
+title: "Rust OS - Week 1"
+pubDate: 2025-08-17
+description: "I'm working on embedded Rust this week. Here's a bit of what I've gotten working so far, up through implementing the println! macro in an unsafe environment."
 author: "SMC"
 image:
   url: ../assets/2025-08-02-qemu_running.png
-  alt: "Picture of the Astro logo"
-tags: ["astro", "blogging", "learning in public"]
+  alt: "Screenshot of a qemu terminal with Hello World printed on it"
+tags: ["rust", "embedded", "learning in public"]
 ---
-![A running qemu instance](../assets/2025-08-02-qemu_running.png)
-Welcome to my _new blog_ about learning Astro! Here, I will share my learning
-journey as I build a new website.
+I've been making my way through <a href="https://os.phil-opp.com" class="text-secondary">Writing an OS in Rust</a> by Phil Opperman.   
+<br/>
+This has been slow going as I tend to jump around projects quite a bit. I've also been working my way through
+<a href="https://www.oreilly.com/library/view/command-line-rust/9781098109424/" class="text-secondary">Command Line Rust</a>
+by Ken Youens-Clark, as well as playing around with <a href="https://book.leptos.dev/" class="text-secondary">Leptos</a>,
+reviving this  <a href="https://astro.build/" class="text-secondary">Astro</a> blog, some python projects, and trying to keep up with life and work as well. 
+<br/>
+<br/>
+I've been interested in Rust since last year. I don't have a lot of experience with systems programming, my only work experience is with interpreted languages and a small amount of Go.
+I decided to stick with Rust after the <a href="https://arstechnica.com/gadgets/2025/02/linux-leaders-pave-a-path-for-rust-in-kernel-while-supporting-c-veterans/" class="text-secondary">conflicts about Rust in the Linux kernel </a>
+seemed to be shaking out as well as the <a href="https://www.cisa.gov/news-events/news/urgent-need-memory-safety-software-products" class="text-secondary">statements by CISA on memory safety</a>.
 
-## What I've accomplished
 
-1. **Installing Astro**: First, I created a new Astro project and set up my
-   online accounts.
 
-2. **Making Pages**: I then learned how to make pages by creating new `.astro`
-   files and placing them in the `src/pages/` folder.
 
-3. **Making Blog Posts**: This is my first blog post! I now have Astro pages
-   and Markdown posts!
-
-## What's next
-
-I will finish the Astro tutorial, and then keep adding more posts. Watch this
-space for more to come.

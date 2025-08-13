@@ -3,12 +3,19 @@ import { Image } from "astro:assets";
 const {url, title, image, altText, date, description} = Astro.props;
 const isImageObject = typeof image === "object";
 ---
-<li><a href={url}>
-<p>{date} {title}</p>
-{isImageObject ? (
-  <Image class="heroImage" src={image} alt={altText} widths={[400, 800, 1200]} sizes="100vw" />
-  ) : (
-    <img class="heroImage" src={image} alt={altText} />
-  )}
-  <p>{description}</p>
-</a></li>
+<li class="my-8">
+  <a href={url}>
+    <div class="mx-auto card hover:shadow-md transition-transform duration-200 ease-in-out">
+      <div class="card-body">
+        <h2 class="card-title">{date} {title}</h2>
+        {isImageObject ? (
+          <Image class="heroImage" src={image} alt={altText} widths={[400, 800, 1200]} sizes="100vw" />
+        ) : (
+          <img class="heroImage" src={image} alt={altText} />
+        )}
+        <p>{description}</p>
+      </div>
+    </div>
+  </a>
+</li>
+

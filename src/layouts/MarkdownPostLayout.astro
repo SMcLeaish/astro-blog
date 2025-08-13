@@ -9,36 +9,14 @@ const isImageObject = typeof frontmatter.image.url === "object";
   <p><em>{frontmatter.description}</em></p>
   <p>Written by: {frontmatter.author}</p>
   {isImageObject ? (
-    <Image class="heroImage" src={frontmatter.image.url} alt={frontmatter.image.alt} widths={[400, 800, 1200]} sizes="100vw" />
+    <Image class="heroImage w-full" src={frontmatter.image.url} alt={frontmatter.image.alt} widths={[400, 800, 1200]} sizes="100vw" />
   ) : (
-    <img class="heroImage" src={frontmatter.image.url} alt={frontmatter.image.alt} />
+    <img class="heroImage w-full" src={frontmatter.image.url} alt={frontmatter.image.alt} />
   )}
-  <div class="tags">
+  <slot />
+  <div class="tags flex-wrap">
     {frontmatter.tags.map((tag: string) => (
-      <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>
+      <button class="btn btn-sm text-secondary m-2"><a href={`/tags/${tag}`}>{tag}</a></button>
     ))}
   </div>
-  <slot />
 </BaseLayout>
-<style>
-  a {
-    color: #00539F;
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    margin: 0.25em;
-    border: dotted 1px #a1a1a1;
-    border-radius: .5em;
-    padding: .5em 1em;
-    font-size: 1.15em;
-    background-color: #F8FCFD;
-  }
-  .heroImage {
-    width: 100%;
-  }
-</style>
