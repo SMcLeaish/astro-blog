@@ -1,9 +1,22 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Greeting from '../components/Greeting.astro';
-const pageTitle = "Home (WIP)";
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogPost from "../components/BlogPost.astro";
+const pageTitle = "Posts";
+const allPosts = await getCollection("blog");
 ---
-
 <BaseLayout pageTitle={pageTitle}>
-  <p>This is my ugly little Astro blog. I'm publishing it as is so I'm forced to make it better!</p>
+  <p>Current Projects</p>
+  <ul>
+    {allPosts.map((post: any) => (
+    <BlogPost url={`/posts/${post.id}`}
+    image={post.data.image.url}
+    altText={post.data.image.alt}
+    date={post.data.pubDate.toLocaleDateString()}
+    title={post.data.title}
+    description={post.data.description}
+     />))}
+
+  </ul>
 </BaseLayout>
+

@@ -11,13 +11,38 @@ const { pageTitle } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <style>
+    @view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: fade 0.3s ease both;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+</style>
+<script type="speculationrules">
+{
+  "prerender": [
+    {
+      "where": {
+        "selector_matches": "a"
+      }
+    }
+  ]
+}
+</script>
     <title>{pageTitle}</title>
   </head>
   <body class="bg-base-200 min-h-screen flex flex-col">
   <ThemeIcon />
   <main class="flex-grow w-full max-w-4xl mx-auto p-6 bg-base-100 text-base-content">
     <Navigation />
-    <h1>{pageTitle}</h1>
     <slot />
     <script>
       document.querySelector(".hamburger")?.addEventListener("click", () => {

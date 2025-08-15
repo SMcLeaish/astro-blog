@@ -4,18 +4,21 @@ const icons = {
   moon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>`
 }
 ---
-<button class="cursor-pointer fixed top-2 left-2 z-50" aria-label="Toggle theme" id="themeToggle">
-  <div class="sun fill-current" fill-rule="evenodd" set:html={icons.sun}></div>
-  <div class="moon fill-current" fill-rule="evenodd" set:html={icons.moon}></div>
-</button>
-<style>
-#themeToggle {
-  border: 0;
-  background: none;
-  padding: 0;
-  margin: 0;
-}
+<ul class="menu menu-horizontal bg-base-300 rounded-box top-2 cursor-pointer fixed left-2 z-50 flex flex-row">
+  <li>
+    <button
+      aria-label="Toggle theme"
+      id="themeToggle"
+      class="tooltip tooltip-right hover:scale-110 transition-all duration-200 ease-in-out"
+      data-tip="Toggle theme"
+    >
+<div class="w-6 h-6 fill-current sun" set:html={icons.sun}></div>
+<div class="w-6 h-6 fill-current moon" set:html={icons.moon}></div>
+    </button>
+  </li>
+</ul>
 
+<style>
 .sun,
 .moon {
   position: relative;
