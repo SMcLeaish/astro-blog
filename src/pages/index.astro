@@ -6,7 +6,6 @@ const pageTitle = "Posts";
 const allPosts = await getCollection("blog");
 ---
 <BaseLayout pageTitle={pageTitle}>
-  <p>Current Projects</p>
   <ul>
     {allPosts.map((post: any) => (
     <BlogPost url={`/posts/${post.id}`}

@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
-const {url, title, image, altText, date, description } = Astro.props;
+import Prose from "./Prose.astro";
+const {url, title, image, altText, date, description, post } = Astro.props;
 const isImageObject = typeof image === "object";
 ---
 <li class="my-8">
@@ -13,7 +14,9 @@ const isImageObject = typeof image === "object";
         ) : (
           <img class="heroImage" src={image} alt={altText} />
         )}
+        <Prose>
         <p>{description}</p>
+      </Prose>
       </div>
     </article>
   </a>
