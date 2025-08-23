@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import { Image } from 'astro:assets';
+import Prose from "../components/Prose.astro";
 const {frontmatter} = Astro.props;
 const isImageObject = typeof frontmatter.image.url === "object";
 ---
@@ -12,7 +13,9 @@ const isImageObject = typeof frontmatter.image.url === "object";
   ) : (
     <img class="heroImage w-full" src={frontmatter.image.url} alt={frontmatter.image.alt} />
   )}
-  <slot />
+  <Prose>
+  <slot/>
+  </Prose>
   <div class="tags flex-wrap">
     {frontmatter.tags.map((tag: string) => (
       <button class="btn btn-sm text-secondary m-2"><a href={`/tags/${tag}`}>{tag}</a></button>

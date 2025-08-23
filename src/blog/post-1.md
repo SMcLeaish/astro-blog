@@ -8,7 +8,7 @@ image:
   alt: "Screenshot of a qemu terminal with Hello World printed on it"
 tags: ["rust", "embedded", "learning in public"]
 ---
-I've been making my way through <a href="https://os.phil-opp.com" class="text-secondary">Writing an OS in Rust</a> by Phil Opperman.   
+I've been *making* my way through [Writing an OS in Rust](https://os.phil-opp.com) by Phil Opperman.   
 <br/>
 This has been slow going as I tend to jump around projects quite a bit. I've also been working my way through
 <a href="https://www.oreilly.com/library/view/command-line-rust/9781098109424/" class="text-secondary">Command Line Rust</a>

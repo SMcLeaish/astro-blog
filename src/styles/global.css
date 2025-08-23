@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tailwindcss/preflight.css" layer(base);
+@plugin '@tailwindcss/typography';
 
 /* stylelint-disable-next-line at-rule-no-unknown */
 @plugin "daisyui" {
