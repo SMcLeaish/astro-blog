@@ -8,7 +8,8 @@ const isImageObject = typeof image === "object";
   <a href={url}>
     <article class="mx-auto card hover:shadow-md transition-transform duration-200 ease-in-out">
       <div class="card-body">
-        <h2 class="card-title">{date} {title}</h2>
+        <h2 class="card-title">{date}</h2>
+        <h2 class="card-title">{title}</h2>
         {isImageObject ? (
           <Image class="heroImage" src={image} alt={altText} widths={[400, 800, 1200]} sizes="100vw" />
         ) : (

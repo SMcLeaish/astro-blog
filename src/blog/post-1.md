@@ -1,6 +1,6 @@
 ---
-title: "Rust OS - Week 1"
-pubDate: 2025-08-17
+title: "Baremetal OS development with Rust"
+pubDate: 2025-08-23
 description: "I'm working on embedded Rust this week. Here's a bit of what I've gotten working so far, up through implementing the println! macro in an unsafe environment."
 author: "SMC"
 image:
