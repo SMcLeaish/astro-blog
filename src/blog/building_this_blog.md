@@ -12,11 +12,11 @@ tags: ["astro", "tailwindcss", "daisyui"]
 <br/>
 
 ### Background - Why Astro?
-I wanted to give a little background on this site. I've used and enjoyed [Astro](https://astro.build) for a few projects,
+I've used and enjoyed [Astro](https://astro.build) for a few projects,
 for a number of reasons:
 
 * Mix and match frameworks
-* SSR/CSA both supported
+* SSR/CSR both supported
 * File-based routing
 * [Islands](https://docs.astro.build/en/concepts/islands/) - for selective hydration
 
@@ -32,4 +32,6 @@ Maybe even someone reads this and figures out something that gets them unstuck.
 ### Tailwind and Daisy
 On previous projects with [Astro](https://astro.build), I've still ended up going back to what I know and pulling in [React](https://react.dev) and often [Shadcn](https://ui.shadcn.com)
 for styling, essentially making a [React](https://react.dev) app with extra steps. I wanted to try doing something a little more lightweight, and
-I ended up building this page with just [Astro](https://astro.build), 
+I ended up building this page with just [Astro](https://astro.build), [Tailwind](https://tailwindcss.com), and [daisyUI](https://daisyui.com).
+
+### What I'd still like to get working

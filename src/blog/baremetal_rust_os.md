@@ -6,7 +6,7 @@ author: "SMC"
 image:
   url: ../assets/2025-08-02-qemu_running.png
   alt: "Screenshot of a qemu terminal with Hello World printed on it"
-tags: ["rust", "embedded", "learning in public"]
+tags: ["rust", "embedded"]
 ---
 I've been making my way through [Writing an OS in Rust](https://os.phil-opp.com) by Phil Opperman.   
 <br/>
