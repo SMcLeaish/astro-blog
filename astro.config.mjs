@@ -7,8 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://smcleaish.github.io",
-  base: "/astro-blog",
+  site: "https://seanmcleaish.com",
   integrations: [alpinejs({ entrypoint: "/src/entrypoint" })],
 
   vite: {
