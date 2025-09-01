@@ -33,11 +33,10 @@ jobs:
         run: |
           echo "<html><body><h1>Hello from GitHub Actions!</h1></body></html>" > index.html
           
-          aws s3 cp index.html s3://${{ secrets.AWS_S3_BUCKET_NAME }}/index.html
-
+          aws s3 cp index.html s3://${{ secrets.AWS_S3_BUCKET_NAME }}/index.html --region ${{ env.AWS_REGION }}
+          
       - name: List S3 bucket contents
-        run: aws s3 ls s3://${{ secrets.AWS_S3_BUCKET_NAME }}
+        run: aws s3 ls s3://${{ secrets.AWS_S3_BUCKET_NAME }} --region ${{ env.AWS_REGION }}
 
       - name: Validate S3 Upload
-        run: aws s3 ls s3://${{ secrets.AWS_S3_BUCKET_NAME }}/index.html
-
+        run: aws s3 ls s3://${{ secrets.AWS_S3_BUCKET_NAME }}/index.html --region ${{ env.AWS_REGION }}
