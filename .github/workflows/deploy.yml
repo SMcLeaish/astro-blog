@@ -14,29 +14,22 @@ permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
 jobs:
-  AssumeRoleAndCallIdentity:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v3
+      - name: Install, build, and upload your site
+        uses: withastro/action@v3
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
           role-to-assume: arn:aws:iam::290726015909:role/github-actions-deploy
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ env.AWS_REGION }}
-      # Hello from AWS: WhoAmI
-      - name: Sts GetCallerIdentity
-        run: |
-          aws sts get-caller-identity
-      - name: Upload to S3
-        run: |
-          echo "<html><body><h1>Hello from GitHub Actions!</h1></body></html>" > index.html
-          
-          aws s3 cp index.html s3://${{ secrets.AWS_S3_BUCKET_NAME }}/index.html --region ${{ env.AWS_REGION }}
-          
-      - name: List S3 bucket contents
-        run: aws s3 ls s3://${{ secrets.AWS_S3_BUCKET_NAME }} --region ${{ env.AWS_REGION }}
-
-      - name: Validate S3 Upload
-        run: aws s3 ls s3://${{ secrets.AWS_S3_BUCKET_NAME }}/index.html --region ${{ env.AWS_REGION }}
+      - name: Deploy to S3
+        run: aws s3 sync --delete ./dist/ s3://${{ secrets.AWS_S3_BUCKET_NAME }}
