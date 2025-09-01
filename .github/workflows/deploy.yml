@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 env:
   
-  AWS_REGION : "us-east-1" #Change to reflect your Region
+  AWS_REGION : us-east-1 #Change to reflect your Region
 
 # Permission can be added at job level or workflow level    
 permissions:
@@ -29,3 +29,15 @@ jobs:
       - name: Sts GetCallerIdentity
         run: |
           aws sts get-caller-identity
+      - name: Upload to S3
+        run: |
+          echo "<html><body><h1>Hello from GitHub Actions!</h1></body></html>" > index.html
+          
+          aws s3 cp index.html s3://${{ secrets.AWS_S3_BUCKET_NAME }}/index.html
+
+      - name: List S3 bucket contents
+        run: aws s3 ls s3://${{ secrets.AWS_S3_BUCKET_NAME }}
+
+      - name: Validate S3 Upload
+        run: aws s3 ls s3://${{ secrets.AWS_S3_BUCKET_NAME }}/index.html
+
