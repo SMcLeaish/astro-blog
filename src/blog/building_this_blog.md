@@ -12,26 +12,33 @@ tags: ["astro", "tailwindcss", "daisyui"]
 <br/>
 
 ### Background - Why Astro?
-I've used and enjoyed [Astro](https://astro.build) for a few projects,
-for a number of reasons:
+I've used and enjoyed [Astro](https://astro.build) for a few projects, for a number of reasons:
+* [Islands](https://docs.astro.build/en/concepts/islands/) let you use components from different frameworks and decide if and when
+they're loaded. It offers performance increases, but it also gives you a lot of options for experimentation.
+* On the projects where I've used Astro in the past I've tried to use frameworks sparingly and lean into html/css or vanilla JS. I'm used to
+[React](https://react.dev) and had been drawn to Astro to reconnect to the basics.
+* ASTRO uses file based routing. This is supposedly better for SEO but I just like it better than jacking with React Router.
+* ASTRO encourages using [Nano Stores](https://docs.astro.build/en/recipes/sharing-state-islands/) for state, which are framework-agnostic.
 
-* Mix and match frameworks
-* SSR/CSR both supported
-* File-based routing
-* [Islands](https://docs.astro.build/en/concepts/islands/) - for selective hydration
-
-### Why Blogging?
-I've never been a big blogger, but I was reading about [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/)
-and before long I had ended up making this page. I'm hoping that making an effort to write a bit about what I'm doing as I go will give things
-a chance to gel a bit.
-
-Maybe I can come back in the future to reflect on exactly why I made some decision I made in the past.
-
-Maybe even someone reads this and figures out something that gets them unstuck.
 
 ### Tailwind and Daisy
-On previous projects with [Astro](https://astro.build), I've still ended up going back to what I know and pulling in [React](https://react.dev) and often [Shadcn](https://ui.shadcn.com)
-for styling, essentially making a [React](https://react.dev) app with extra steps. I wanted to try doing something a little more lightweight, and
-I ended up building this page with just [Astro](https://astro.build), [Tailwind](https://tailwindcss.com), and [daisyUI](https://daisyui.com).
+I've gotten used to reaching for [Shadcn](https://ui.shadcn.com) once again locking me into REACT. Sticking with the concept of
+framework agnosticism I'm using TAILWIND for coherent styling and the DAISY component library.
+
+### The Blog
+ASTRO comes with a [content collections](https://docs.astro.build/en/guides/content-collections/) API that essentially gives it a built-in headless
+CMS. It supports writing posts in Markdown or MDX. I've wired it up with a GitHub action so it gets published whenever I push the repository, making it really easy to update. Source for this site,
+including the GitHub workflow can be found [here](https://github.com/SMcLeaish/astro-blog).
+
+TAILWIND has a nice plugin for styling text called [typography](https://v1.tailwindcss.com/docs/typography-plugin) that works great with Markdown. It really simplifies styling free-text.
+
+I've been using HELIX as my text editor for the last couple of months, and I'll probably do a post on it in the future, because it rocks. While not limited to HELIX, while building this
+site I found [ltex-ls-plus](https://github.com/ltex-plus/ltex-ls-plus), a language server that adds grammar and spell-checking to your Markdown editor.
+Integrating it into HELIX was very easy using the reference HELIX maintains on their [Language Server Configurations](https://github.com/helix-editor/helix/wiki/Language-Server-Configurations) page.
+
+### Why Blogging?
+It feels weird blogging in 2025. I'm not great about taking notes, and I have a bad tendency to jump between projects.
+I'm hoping that trying to publish something occasionally as I'm going along will help with both of those problems. If anyone happens along and is working on the same things as me all the better.
 
 ### What I'd still like to get working
+One gripe about the ASTRO [content collections](https://docs.astro.build/en/guides/content-collections/) is it doesn't have a 
