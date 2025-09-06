@@ -25,7 +25,7 @@ framework-agnostic.
 
 ### Tailwind and Daisy
 I've gotten used to reaching for [Shadcn](https://ui.shadcn.com) once again locking me into REACT. Sticking with the concept of
-framework agnosticism I'm using TAILWIND for coherent styling and the DAISY component library.
+framework agnosticism I'm using [Tailwind](http://tailwindcss.com/) for coherent styling and the DAISY component library.
 
 ### The Blog
 [Astro](https://astro.build) comes with a [content collections](https://docs.astro.build/en/guides/content-collections/) API that essentially
@@ -33,12 +33,12 @@ gives it a built-in headless CMS. It supports writing posts in Markdown or MDX. 
 whenever I push the repository, making it really easy to update. Source for this site, including the GitHub workflow can be found
 [here](https://github.com/SMcLeaish/astro-blog).
 
-TAILWIND has a nice plugin for styling text called [typography](https://v1.tailwindcss.com/docs/typography-plugin) that works great with
+[Tailwind](http://tailwindcss.com/) has a nice plugin for styling text called [typography](https://v1.tailwindcss.com/docs/typography-plugin) that works great with
 Markdown. It really simplifies styling free-text.
 
-I've been using HELIX as my text editor for the last couple of months, and I'll probably do a post on it in the future, because it rocks.
-While not limited to HELIX, while building this site I found [ltex-ls-plus](https://github.com/ltex-plus/ltex-ls-plus), a language server that
-adds grammar and spell-checking to your Markdown editor. Integrating it into HELIX was very easy using the reference HELIX maintains on their
+I've been using [Helix](http://helix-editor.com/) as my text editor for the last couple of months, and I'll probably do a post on it in the future, because it rocks.
+While not limited to [Helix](http://helix-editor.com/), while building this site I found [ltex-ls-plus](https://github.com/ltex-plus/ltex-ls-plus), a language server that
+adds grammar and spell-checking to your Markdown editor. Integrating it into [Helix](http://helix-editor.com/) was very easy using the reference [Helix](http://helix-editor.com/) maintains on their
 [Language Server Configurations](https://github.com/helix-editor/helix/wiki/Language-Server-Configurations) page.
 
 ### Why Blogging?
