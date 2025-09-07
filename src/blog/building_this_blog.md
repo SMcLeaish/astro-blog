@@ -24,7 +24,7 @@ framework-agnostic.
 
 
 ### Tailwind and Daisy
-I've gotten used to reaching for [Shadcn](https://ui.shadcn.com) once again locking me into REACT. Sticking with the concept of
+I've gotten used to reaching for [Shadcn](https://ui.shadcn.com) once again locking me into [React](https://react.dev/). Sticking with the concept of
 framework agnosticism I'm using [Tailwind](http://tailwindcss.com/) for coherent styling and the DAISY component library.
 
 ### The Blog
