@@ -10,10 +10,11 @@ const isImageObject = typeof image === "object";
       <div class="card-body">
         <h2 class="card-title">{date}</h2>
         <h2 class="card-title">{title}</h2>
+        <br/>
         {isImageObject ? (
-          <Image class="heroImage" src={image} alt={altText} widths={[400, 800, 1200]} sizes="100vw" />
+          <Image class="heroImage mx-auto w-full max-w-2xl rounded-xl object-cover" src={image} alt={altText} widths={[400, 800, 1200]} sizes="100vw" />
         ) : (
-          <img class="heroImage" src={image} alt={altText} />
+          <img class="heroImage mx-auto max-w-2xl rounded-xl object-cover" src={image} alt={altText} />
         )}
         <Prose>
         <p>{description}</p>

@@ -1,10 +1,10 @@
 ---
 title: Building This Blog
-author: Astro Learner
+author: Sean McLeaish
 description: "Building this page using Astro, Tailwind, and DaisyUI"
 image:
   url: "../assets/astro-page.png"
-  alt: "The Astro logo on a dark background with a purple gradient arc."
+  alt: "The Astro, Tailwind, and DaisyUI logos on a dark background with a purple gradient arc."
 pubDate: 2025-08-17
 tags: ["astro", "tailwindcss", "daisyui"]
 ---
