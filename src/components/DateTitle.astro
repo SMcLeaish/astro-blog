@@ -1,0 +1,15 @@
+---
+const { date, title } = Astro.props;
+---
+
+<div class="mb-4">
+  <h2 class="text-xl font-bold">{title}</h2>
+  <p class="text-sm text-gray-500">
+    {date.toLocaleDateString(undefined, {
+      year: "2-digit",
+      month: "numeric",
+      day: "numeric",
+    })}
+  </p>
+</div>
+

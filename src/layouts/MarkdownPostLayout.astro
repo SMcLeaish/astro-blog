@@ -2,18 +2,16 @@
 import BaseLayout from "./BaseLayout.astro";
 import { Image } from 'astro:assets';
 import Prose from "../components/Prose.astro";
+import DateTitle from "../components/DateTitle.astro"
+import HeroImage from "../components/HeroImage.astro";
 const {frontmatter} = Astro.props;
 const isImageObject = typeof frontmatter.image.url === "object";
 ---
 <BaseLayout pageTitle={frontmatter.title}>
-  <p><em>{frontmatter.description}</em></p>
-  <p>{frontmatter.pubDate.toLocaleDateString(undefined, { year: '2-digit', month: 'numeric', day: 'numeric' })}</p>
-  {isImageObject ? (
-    <Image class="heroImage w-full" src={frontmatter.image.url} alt={frontmatter.image.alt} widths={[400, 800, 1200]} sizes="100vw" />
-  ) : (
-    <img class="heroImage w-full" src={frontmatter.image.url} alt={frontmatter.image.alt} />
-  )}
+  <DateTitle title={frontmatter.title} date={frontmatter.pubDate} />
+  <HeroImage image={frontmatter.image.url} altText={frontmatter.image.alt} />
   <Prose>
+  <p>{frontmatter.description}</p>
   <slot/>
   </Prose>
   <div class="tags flex-wrap">

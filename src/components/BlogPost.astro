@@ -1,8 +1,7 @@
 ---
-import { Image } from "astro:assets";
+import HeroImage from "./HeroImage.astro";
 import Prose from "./Prose.astro";
-const {url, title, image, altText, date, description, post } = Astro.props;
-const isImageObject = typeof image === "object";
+const {url, title, image, altText, date, description } = Astro.props;
 ---
 <li class="my-8">
   <a href={url}>
@@ -11,11 +10,7 @@ const isImageObject = typeof image === "object";
         <h2 class="card-title">{date}</h2>
         <h2 class="card-title">{title}</h2>
         <br/>
-        {isImageObject ? (
-          <Image class="heroImage mx-auto w-full max-w-2xl rounded-xl object-cover" src={image} alt={altText} widths={[400, 800, 1200]} sizes="100vw" />
-        ) : (
-          <img class="heroImage mx-auto max-w-2xl rounded-xl object-cover" src={image} alt={altText} />
-        )}
+        <HeroImage image={image} altText={altText} />
         <Prose>
         <p>{description}</p>
       </Prose>

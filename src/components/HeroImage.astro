@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+const { image, altText } = Astro.props;
+const isAstroImage =
+  image &&
+  typeof image === "object" &&
+  "src" in image &&
+  "width" in image &&
+  "height" in image;
+---
+
+{isAstroImage ? (
+  <Image
+    class="heroImage mx-auto w-full max-w-2xl rounded-xl object-cover"
+    src={image}
+    alt={altText}
+    widths={[400, 800, 1200]}
+    sizes="100vw"
+    loading="lazy"
+  />
+) : (
+  <img
+    class="heroImage mx-auto w-full max-w-2xl rounded-xl object-cover"
+    src={image}
+    alt={altText}
+    loading="lazy"
+  />
+)}
+
