@@ -1,11 +1,9 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import { Image } from 'astro:assets';
 import Prose from "../components/Prose.astro";
 import DateTitle from "../components/DateTitle.astro"
 import HeroImage from "../components/HeroImage.astro";
 const {frontmatter} = Astro.props;
-const isImageObject = typeof frontmatter.image.url === "object";
 ---
 <BaseLayout pageTitle={frontmatter.title}>
   <DateTitle title={frontmatter.title} date={frontmatter.pubDate} />

@@ -12,7 +12,7 @@ const allPosts = await getCollection("blog");
     <BlogPost url={`/posts/${post.id}`}
     image={post.data.image.url}
     altText={post.data.image.alt}
-    date={post.data.pubDate.toLocaleDateString()}
+    date={post.data.pubDate}
     title={post.data.title}
     description={post.data.description}
      />))}

@@ -1,12 +1,12 @@
 ---
-title: Deploying this Blog
+title: Deploying a Static Site to AWS using Terraform and Github Actions
 author: Sean McLeaish
-description: "Deploying this blog to AWS as a static site using Terraform and GitHub actions"
+description: "How to deploy a static site using repeatable, version-controlled infrastructure as code (IaC), stay within Amazon Web Services’ free tier, and leverage global caching with Amazon CloudFront."
 image:
   url: "../assets/aws-tf-gh.png"
   alt: "The AWS, Terraform, and GitHub actions logos on a green to orange gradient arc."
 pubDate: 2025-08-25
-tags: ["github actions", "terraform", "aws", "devops"]
+tags: ["github actions", "terraform", "aws", "devops", "IaC"]
 ---
 
 <br/>

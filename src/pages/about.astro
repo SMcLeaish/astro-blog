@@ -1,23 +1,27 @@
 ---
 import '../styles/global.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
-const pageTitle = "About Me";
+import Prose from '../components/Prose.astro';
 ---
 
-<BaseLayout pageTitle="About Me">
+<BaseLayout pageTitle="About">
   <section class="hero min-h-[60vh]">
     <div class="hero-content text-left">
       <div class="max-w-2xl">
-        <h2 class="font-mono mb-6">SMcLeaish</h2>
+        <h2 class="special-elite-regular text-2xl">
+        Sean McLeaish</h2>
+        <Prose>
+        <br/>
         <p class="mb-4">
-          I study data analytics. My primary focus is network analysis. 
+          I am a software developer and data analyst. 
         </p>
         <p class="mb-4">
-          I'm interested in software development, cybersecurity, privacy/security law, radio, and electronics.
+          I'm interested in cybersecurity, privacy/security law, radio, and electronics.
         </p>
         <p class="mb-4">
-          I've developed in Python, Rust, Go, and JavaScript.
+          I've developed in Python, Rust, Go, and TypeScript.
         </p>
+        </Prose>
       </div>
     </div>
   </section>

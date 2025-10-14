@@ -1,14 +1,14 @@
 ---
 import HeroImage from "./HeroImage.astro";
 import Prose from "./Prose.astro";
+import DateTitle from "./DateTitle.astro";
 const {url, title, image, altText, date, description } = Astro.props;
 ---
 <li class="my-8">
   <a href={url}>
     <article class="mx-auto card hover:shadow-md transition-transform duration-200 ease-in-out">
       <div class="card-body">
-        <h2 class="card-title">{date}</h2>
-        <h2 class="card-title">{title}</h2>
+        <DateTitle title={title} date={date} />
         <br/>
         <HeroImage image={image} altText={altText} />
         <Prose>

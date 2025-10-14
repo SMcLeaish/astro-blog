@@ -15,3 +15,17 @@ h1 {
   margin: 1rem 0;
   font-size: 2rem;
 }
+
+/* Register your custom font family and tell the browser where to find it. */
+@font-face {
+  font-family: 'Special Elite';
+  src: url('/fonts/SpecialElite-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+.special-elite-regular {
+  font-family: "Special Elite", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
