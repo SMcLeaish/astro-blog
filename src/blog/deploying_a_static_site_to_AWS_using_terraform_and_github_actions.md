@@ -5,7 +5,7 @@ description: "How to deploy a static site using repeatable, version-controlled i
 image:
   url: "../assets/aws-tf-gh.png"
   alt: "The AWS, Terraform, and GitHub actions logos on a green to orange gradient arc."
-pubDate: 2025-9-29
+pubDate: 2025-09-29
 tags: ["github actions", "terraform", "aws", "devops", "IaC"]
 ---
 
