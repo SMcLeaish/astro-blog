@@ -1,10 +1,10 @@
 ---
 title: "DRAFTTITLE"
-pubDate: DRAFTDATE
+pubDate: 2025-01-01
 description: "DRAFTDESC"
 author: "SMC"
 image:
   url: "DRAFTIMG"
   alt: "DRAFTALT"
-tags: DRAFTTAGS
+tags:
 ---
