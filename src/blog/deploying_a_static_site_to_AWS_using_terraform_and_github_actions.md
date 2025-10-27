@@ -5,12 +5,34 @@ description: "How to deploy a static site using repeatable, version-controlled i
 image:
   url: "../assets/aws-tf-gh.png"
   alt: "The AWS, Terraform, and GitHub actions logos on a green to orange gradient arc."
-pubDate: 2025-08-25
+pubDate: 2025-09-29
 tags: ["github actions", "terraform", "aws", "devops", "IaC"]
 ---
 
 <br/>
 
+### Why to use Terraform
+
+[Terraform](https://developer.hashicorp.com/terraform) is an infrastructure as code (IaC) tool for managing your cloud resources.
+You write Hashicorp Configuration Language files to describe a state that your infrastructure should exist in.
+
+For example:
+* I want one AWS s3 bucket
+* One domain registered through Amazon Route 53
+* A AWS CloudFront distribution that caches my s3 bucket and exposes it to the internet
+
+You write *declarative code*, meaning it describes the end-state, and Terraform will try to run in the background and execute that state.
+That's different from *imperative* code, where you describe a series of steps to get to the end-state (think a bash script.) Terraform will store a
+state file, and when you make changes and run `terraform plan` Terraform will check your declared end-state against the state as it currently
+exists in your state file, and let you know what all changes are going to be made when you run `terraform apply`.
+
+There's a bit of a learning curve! It's led to a bit of a stereotype that Terraform can take a little struggle to get going,
+but once you do, it's easy to keep running and maintain. I'm going to walk through the infrastructure that backs this site, which allows me to automate updates
+when I push commits to the main branch of the blog's repository.
+
+### Managing the Terraform state
+
+To use Github Actions to push 
 ```hcl
 resource "aws_iam_openid_connect_provider" "github" {
   url = "https://token.actions.githubusercontent.com"
