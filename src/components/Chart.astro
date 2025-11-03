@@ -1,0 +1,14 @@
+---
+const { chart } = Astro.props
+---
+<div class="not-prose text-center my-6">
+  <div id="chart-data" data-chart={chart} class="hidden"></div>
+  <div id="vis" ></div>
+</div>
+
+<script>
+  import embed from 'vega-embed'
+  const chartData = document.getElementById('chart-data');
+  const spec = chartData.dataset.chart;
+  const  result = await embed('#vis', spec);
+</script>

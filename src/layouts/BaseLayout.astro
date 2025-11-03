@@ -1,56 +1,75 @@
 ---
-import Navigation from '../components/Navigation.astro'
+import Navigation from '../components/Navigation.astro';
 import ThemeIcon from '../components/ThemeIcon.astro';
 import Social from '../components/Social.astro';
 import '../styles/global.css';
+
 const { pageTitle } = Astro.props;
 ---
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="389f231e-7859-422a-9ead-aa6d07b739d9"></script>
-    <style>
-    @view-transition {
-  navigation: auto;
-}
-
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: fade 0.3s ease both;
-}
-
-@keyframes fade {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-</style>
-<script type="speculationrules">
-{
-  "prerender": [
-    {
-      "where": {
-        "selector_matches": "a"
-      }
-    }
-  ]
-}
-</script>
     <title>{pageTitle}</title>
+
+    <script
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="389f231e-7859-422a-9ead-aa6d07b739d9"
+    ></script>
+
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation: fade 0.3s ease both;
+      }
+
+      @keyframes fade {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+
+    <script type="speculationrules">
+      {
+        "prerender": [
+          {
+            "where": {
+              "selector_matches": "a"
+            }
+          }
+        ]
+      }
+    </script>
   </head>
-  <body class="bg-base-200 min-h-screen flex flex-col">
-  <ThemeIcon />
-  <main class="flex-grow w-full max-w-4xl mx-auto p-6 bg-base-100 text-base-content">
-    <Navigation />
-    <slot />
+
+  <body class="bg-base-200 min-h-screen flex flex-col text-base-content">
+    <ThemeIcon />
+    <Social />
+        <main class="flex-grow w-full">
+      <div class="max-w-6xl mx-auto p-6 bg-base-100">
+        <Navigation />
+        <slot />
+      </div>
+    </main>
+
+
     <script>
       document.querySelector(".hamburger")?.addEventListener("click", () => {
         document.querySelector(".nav-links")?.classList.toggle("hidden");
       });
     </script>
-  </main>
-  <Social />
   </body>
 </html>
+

@@ -1,0 +1,37 @@
+---
+export interface Props {
+  headings: {
+    slug: string;
+    text: string;
+    depth: number;
+  }[];
+  title?: string;
+}
+
+const { headings = [], title = "On this page" } = Astro.props;
+---
+
+{headings.length > 0 && (
+  <aside
+    class="hidden lg:block lg:sticky lg:top-24 lg:h-[calc(100vh-6rem)] lg:w-64 px-4 py-6 border-l border-gray-200 dark:border-gray-700 overflow-y-auto"
+  >
+    <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">
+      {title}
+    </h3>
+    <nav class="space-y-2">
+      {headings
+        .filter((h) => h.depth <= 3)
+        .map((h) => (
+          <a
+            href={`#${h.slug}`}
+            class={`block text-sm hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors ${
+              h.depth === 3 ? "pl-4" : ""
+            }`}
+          >
+            {h.text}
+          </a>
+        ))}
+    </nav>
+  </aside>
+)}
+

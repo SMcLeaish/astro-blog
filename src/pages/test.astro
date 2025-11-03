@@ -1,0 +1,27 @@
+---
+import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Prose from '../components/Prose.astro';
+import Chart from '../components/Chart.astro';
+---
+
+<BaseLayout pageTitle="About">
+  <section class="hero min-h-[60vh]">
+    <div class="hero-content text-left">
+      <div class="max-w-2xl">
+      <br/>
+        <h2 class="special-elite-regular text-2xl">
+        DDI 13</h2>
+        <Prose>
+        <br/>
+        <p class="mb-4">
+        This is a test and weirdly my text is all centered
+        </p>
+        <p class="mb-4">
+        </p>
+        </Prose>
+      </div>
+    </div>
+  </section>
+        <Chart chart='graph.json'/>
+</BaseLayout>

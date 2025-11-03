@@ -1,20 +1,29 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import Prose from "../components/Prose.astro";
-import DateTitle from "../components/DateTitle.astro"
+import DateTitle from "../components/DateTitle.astro";
 import HeroImage from "../components/HeroImage.astro";
-const {frontmatter} = Astro.props;
+import TOC from "../components/TOC.astro";
+
+const { frontmatter, headings } = Astro.props;
 ---
 <BaseLayout pageTitle={frontmatter.title}>
+  <Fragment slot="toc">
+    <TOC headings={headings} />
+  </Fragment>
+
   <DateTitle title={frontmatter.title} date={frontmatter.pubDate} />
   <HeroImage image={frontmatter.image.url} altText={frontmatter.image.alt} />
   <Prose>
-  <p>{frontmatter.description}</p>
-  <slot/>
+    <p>{frontmatter.description}</p>
+    <slot />
   </Prose>
-  <div class="tags flex-wrap">
-    {frontmatter.tags.map((tag: string) => (
-      <button class="btn btn-sm text-secondary m-2"><a href={`/tags/${tag}`}>{tag}</a></button>
+
+  <div class="tags flex-wrap mt-8">
+    {frontmatter.tags.map((tag) => (
+      <button class="btn btn-sm text-secondary m-2">
+        <a href={`/tags/${tag}`}>{tag}</a>
+      </button>
     ))}
   </div>
 </BaseLayout>

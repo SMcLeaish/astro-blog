@@ -2,13 +2,14 @@
 @import "tailwindcss/preflight.css" layer(base);
 @plugin '@tailwindcss/typography';
 
-/* stylelint-disable-next-line at-rule-no-unknown */
 @plugin "daisyui" {
   themes: winter, coffee, dracula, cyberpunk;
 }
 
 html {
   font-family: sans-serif;
+  scroll-padding-top: 6rem;
+  scroll-behavior: smooth;
 }
 
 h1 {
@@ -16,10 +17,9 @@ h1 {
   font-size: 2rem;
 }
 
-/* Register your custom font family and tell the browser where to find it. */
 @font-face {
-  font-family: 'Special Elite';
-  src: url('/fonts/SpecialElite-Regular.ttf');
+  font-family: "Special Elite";
+  src: url("/fonts/SpecialElite-Regular.ttf");
   font-weight: 400;
   font-style: normal;
 }

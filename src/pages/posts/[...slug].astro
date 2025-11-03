@@ -1,20 +1,48 @@
 ---
 import type { GetStaticPaths } from "astro";
 import { getCollection, render } from "astro:content";
-import MarkdownPostLayout from "../../layouts/MarkdownPostLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TOC from "../../components/TOC.astro";
+import Prose from "../../components/Prose.astro";
+import DateTitle from "../../components/DateTitle.astro";
+import HeroImage from "../../components/HeroImage.astro";
 
-export const getStaticPaths = (async() => {
-  const posts = await getCollection('blog');
-  return posts.map(post => ({
-  params: { slug: post.id }, props: { post },
-  }));  
+export const getStaticPaths = (async () => {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
 }) satisfies GetStaticPaths;
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 ---
 
-<MarkdownPostLayout frontmatter={post.data}>
-  <Content />
-</MarkdownPostLayout>
+<BaseLayout pageTitle={post.data.title}>
+  <div class="lg:grid lg:grid-cols-[16rem_1fr] gap-8">
+    <aside class="hidden lg:block sticky top-24 h-fit">
+      <TOC headings={headings} />
+    </aside>
 
+    <article>
+      <DateTitle title={post.data.title} date={post.data.pubDate} />
+      <HeroImage
+        image={post.data.image.url}
+        altText={post.data.image.alt}
+      />
+      <Prose>
+        <p class="mb-4">{post.data.description}</p>
+        <Content />
+      </Prose>
+
+      <div class="tags flex-wrap mt-8">
+        {post.data.tags.map((tag: string) => (
+          <button class="btn btn-sm text-secondary m-2">
+            <a href={`/tags/${tag}`}>{tag}</a>
+          </button>
+        ))}
+      </div>
+    </article>
+  </div>
+</BaseLayout>

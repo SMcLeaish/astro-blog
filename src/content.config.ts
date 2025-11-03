@@ -18,5 +18,20 @@ const blog = defineCollection({
     }),
 });
 
-
-export const collections = { blog };
+const projects = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.mdx", base: "./src/docs" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      pubDate: z.date(),
+      updatedDate: z.date().optional(),
+      description: z.string(),
+      author: z.string(),
+      image: z.object({
+        url: image(),
+        alt: z.string(),
+      }),
+      tags: z.array(z.string()),
+    }),
+});
+export const collections = { blog, projects };
