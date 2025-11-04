@@ -1,0 +1,21 @@
+---
+const { ids } = Astro.props;
+---
+
+<div id="chart-list" data-ids={JSON.stringify(ids)} hidden></div>
+
+<script>
+  import embed from "vega-embed";
+
+  const chartListEl = document.getElementById("chart-list");
+  const ids = JSON.parse(chartListEl.dataset.ids);
+
+  ids.forEach(async (id) => {
+    const el = document.getElementById(id);
+    const url = el.dataset.specUrl;
+    const res = await fetch(url);
+    const spec = await res.json();
+    await embed(`#${id}`, spec, { actions: false });
+  });
+</script>
+

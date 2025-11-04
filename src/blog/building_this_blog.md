@@ -61,7 +61,7 @@ that later as well.
 So, on the to-do list:
 
 - [ ] Excerpts
-- [ ] Table of Contents
+- [x] Table of Contents 🎉
 - [ ] Searching
 - [ ] Pagination
 

@@ -9,6 +9,8 @@ pubDate: 2025-08-17
 tags: ["astro", "tailwindcss", "daisyui"]
 ---
 import Chart from '../components/Chart.astro'
+import ModalGallery from '../components/ModalGallery.astro'
+import RenderCharts from '../components/RenderCharts.astro'
 
 <br/>
 
@@ -23,7 +25,15 @@ Router.
 * [Astro](https://astro.build) encourages using [Nano Stores](https://docs.astro.build/en/recipes/sharing-state-islands/) for state, which are
 framework-agnostic.
 
-<Chart chart="/bar.json" />
+<Chart id='bar' spec='/bar.json'/>
+<RenderCharts ids={['bar']} client:load/>
+
+<ModalGallery
+  id="chart-gallery"
+  titles={["Sales", "Other"]}
+  charts={["/bar.json", "/graph.json"]}
+/>
+
 ### Tailwind and Daisy
 I've gotten used to reaching for [Shadcn](https://ui.shadcn.com) once again locking me into [React](https://react.dev/). Sticking with the concept of
 framework agnosticism I'm using [Tailwind](http://tailwindcss.com/) for coherent styling and the DAISY component library.
@@ -62,7 +72,7 @@ that later as well.
 So, on the to-do list:
 
 - [ ] Excerpts
-- [ ] Table of Contents
+- [x] Table of Contents
 - [ ] Searching
 - [ ] Pagination
 
