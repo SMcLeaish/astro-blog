@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-
+import mdx from "@astrojs/mdx";
 import alpinejs from "@astrojs/alpinejs";
 
 import tailwindcss from "@tailwindcss/vite";
@@ -8,12 +8,12 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
   site: "https://seanmcleaish.com",
-  integrations: [alpinejs({ entrypoint: "/src/entrypoint" })],
+  integrations: [mdx(), alpinejs({ entrypoint: "/src/entrypoint" })],
 
   vite: {
     plugins: [tailwindcss()],
     ssr: {
-      noExternal: ['@igor.dvlpr/astro-post-excerpt'],
+      noExternal: ["@igor.dvlpr/astro-post-excerpt"],
     },
   },
 });
