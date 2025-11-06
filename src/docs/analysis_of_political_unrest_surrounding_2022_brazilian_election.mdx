@@ -1,27 +1,52 @@
 ---
-title: Building This Blog
+title: Galvanize Data Development Immersive Midterm Project - Analysis of Political Unrest Surrounding 2022 Brazilian Election
 author: Sean McLeaish
-description: "Building this page using Astro, Tailwind, and DaisyUI"
+description: Protesters invading the National Congress of Brazil
 image:
-  url: "../assets/astro-page.png"
-  alt: "The Astro, Tailwind, and DaisyUI logos on a dark background with a purple gradient arc."
+  url: "../assets/brazil-riots.png"
+  alt: "Protesters invading the National Congress of Brazil - By TV BrasilGov, CC BY 3.0, https://commons.wikimedia.org/w/index.php?curid=127781054"
 pubDate: 2025-08-17
 tags: ["astro", "tailwindcss", "daisyui"]
 ---
+import Chart from '../components/Chart.astro'
+import ModalGallery from '../components/ModalGallery.astro'
+import RenderCharts from '../components/RenderCharts.astro'
 
 <br/>
 
-### Background - Why Astro?
-I've used and enjoyed [Astro](https://astro.build) for a few projects, for a number of reasons:
-* [Islands](https://docs.astro.build/en/concepts/islands/) let you use components from different frameworks and decide if and when
-they're loaded. It offers performance increases, but it also gives you a lot of options for experimentation.
-* On the projects where I've used Astro in the past I've tried to use frameworks sparingly and lean into html/css or vanilla JS. I'm used to
-[React](https://react.dev) and had been drawn to Astro to reconnect to the basics.
-* [Astro](https://astro.build) uses file based routing. This is supposedly better for SEO, but I just like it better than jacking with React
-Router.
-* [Astro](https://astro.build) encourages using [Nano Stores](https://docs.astro.build/en/recipes/sharing-state-islands/) for state, which are
-framework-agnostic.
+## The 2022 Presidential Election
 
+In October 2022, following the second round of voting in the closest presidential election in Brazil to date, the Superior Electoral Court ruled that Lula da Silva had won over
+then incumbent president Jair Bolsonaro.
+
+In the aftermath, Bolsonaro refused to concede the victory, calling on the Superior Electoral Court to invalidate votes an amount of votes that would have left him with 51% of the count. There was a wave of protests in response,
+culminating in January 2023 with Bolsonaro supporters storming the offices of the National Congress, the Presidential Palace, and the Supreme Federal Court, in an attempt to overthrow the
+newly sworn in government. Bolsonaro was convicted of attempting to overthrow the government on September 25, 2025 and sentenced to 27 years in prison. 
+
+## An Overview of Political Unrest in Brazil 2022-2024
+
+Using reported incidents taken from the Armed Conflict Location & Event Data [(ACLED)](acleddata.com) site, we see that from January of 2022 to January of 2024
+they have aggregated reports of 17,148 total incidents of civil disturbance, including protests,
+riots, and acts of state violence against civilians. We can see increases that correspond to several key events:
+* In August, Bolsonaro stated that
+ he and his supporters "must obliterate" the opposition Workers' Party,
+leading to Amnesty International stating that there was at least one case of political violence every day, with 88% occurring in September.
+* October 2nd, the day of the first round of elections
+* The large spike in November, representing the public contesting of the elections
+* Finally January when the protestors attempted to unseat the government. 
+
+<Chart id='line' spec='/charts/brazil_project/line-incidents_2022-2024.json'/>
+
+This gives an average of 635 per state, however we can see outliers in several states:
+
+<Chart id='bar' spec='/charts/brazil_project/bar-incidents_of_violence_by_state.json'/>
+<RenderCharts ids={['bar', 'line']} client:load/>
+
+<ModalGallery
+  id="chart-gallery"
+  titles={["View Map"]}
+  charts={["/charts/brazil_project/map_by_state.json"]}
+/>
 
 ### Tailwind and Daisy
 I've gotten used to reaching for [Shadcn](https://ui.shadcn.com) once again locking me into [React](https://react.dev/). Sticking with the concept of
@@ -61,7 +86,7 @@ that later as well.
 So, on the to-do list:
 
 - [ ] Excerpts
-- [x] Table of Contents 🎉
+- [x] Table of Contents
 - [ ] Searching
 - [ ] Pagination
 

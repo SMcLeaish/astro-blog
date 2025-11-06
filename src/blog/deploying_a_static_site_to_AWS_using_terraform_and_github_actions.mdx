@@ -1,0 +1,148 @@
+---
+title: Deploying a Static Site to AWS using Terraform and GitHub Actions
+author: Sean McLeaish
+description: "How to deploy a static site using repeatable, version-controlled infrastructure as code (IaC), stay within Amazon Web Services’ free tier, and leverage global caching with Amazon CloudFront."
+image:
+  url: "../assets/aws-tf-gh.png"
+  alt: "The AWS, Terraform, and GitHub actions logos on a green to orange gradient arc."
+pubDate: 2025-09-29
+tags: ["github-actions", "terraform", "aws", "devops", "iac"]
+---
+
+<br/>
+
+## Why Terraform?
+
+I wanted my site infrastructure to live in version control, right next to my code.  
+[Terraform](https://developer.hashicorp.com/terraform) is great for that. It lets you declare what you want your cloud to look like, then handles the how behind the scenes.
+
+A few reasons I like it:
+* It’s **declarative**, you describe the *end state*. Years ago, had you asked me how to automate this process, my instinct would have been to write a script, i.e. an
+**imperative** list of steps to arrive at the desired outcome. But having worked in environments that are hanging by the thread of poorly maintained and documented bash scripts,
+I see the value of industry standard, structured, version controlled IaC tooling. 
+* It **tracks state**, so you can see what’s changing before applying it.
+* It **plays nicely with automation**, especially when paired with GitHub Actions and OpenID Connect (OIDC).
+
+Like many tools, Terraform has a bit of an “it’s hard until it’s easy” learning curve. Once you get your first deployment running, everything starts to click.
+
+---
+
+## Connecting GitHub Actions to AWS Securely
+
+To deploy automatically when I push to my repository, GitHub needs a way to act on my AWS account **without permanent credentials**.  
+That’s where **OIDC** comes in. Instead of storing access keys, GitHub authenticates using short-lived tokens.
+
+Here’s the Terraform setup that makes that work:
+
+### Allow GitHub to be trusted as an identity provider
+```hcl
+resource "aws_iam_openid_connect_provider" "github" {
+  url = "https://token.actions.githubusercontent.com"
+  client_id_list = ["sts.amazonaws.com"]
+  thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1"]
+  tags = { Name = "GitHub-Actions-OIDC-Provider" }
+}
+```
+### Create a role GitHub can assume
+```hcl
+resource "aws_iam_role" "github_actions" {
+  name = "github-actions-deploy"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [{
+      Effect = "Allow",
+      Principal = { Federated = aws_iam_openid_connect_provider.github.arn },
+      Action = "sts:AssumeRoleWithWebIdentity",
+      Condition = {
+        StringEquals = {
+          "token.actions.githubusercontent.com:sub" = "repo:<your-username>/<your-repo>:ref:refs/heads/main",
+          "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
+        }
+      }
+    }]
+  })
+}
+```
+### Attach permissions for S3 and CloudFront
+```hcl
+data "aws_iam_policy_document" "github_actions_policy" {
+  statement {
+    actions = ["s3:PutObject", "s3:PutObjectAcl", "s3:DeleteObject", "s3:ListBucket"]
+    resources = [
+      "arn:aws:s3:::${local.site_bucket}",
+      "arn:aws:s3:::${local.site_bucket}/*"
+    ]
+  }
+
+  statement {
+    sid = "CloudFrontInvalidationAccess"
+    actions = ["cloudfront:CreateInvalidation", "cloudfront:GetInvalidation"]
+    resources = [module.cdn.cloudfront_distribution_arn]
+  }
+}
+```
+## Automating the Deployment
+
+With the IAM role created, the GitHub Actions workflow just needs to assume it:
+```yaml
+name: Deploy Astro site to AWS S3
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  AWS_REGION: us-east-1
+
+permissions:
+  id-token: write   # needed for GitHub → AWS OIDC
+  contents: read    # needed to checkout the repo
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Builds the Astro site into ./dist
+      - name: Build Astro site
+        uses: withastro/action@v3
+
+      # Pass build output to the deploy job
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+
+      # Assumes the role that Terraform created
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_GHA_ROLE_ARN }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Sync static files to S3
+      - name: Sync to S3
+        run: aws s3 sync --delete ./dist/ s3://${{ secrets.AWS_S3_BUCKET_NAME }}
+
+      # Bust the CDN cache so the new site shows up
+      - name: Invalidate CloudFront
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+
+```
+
