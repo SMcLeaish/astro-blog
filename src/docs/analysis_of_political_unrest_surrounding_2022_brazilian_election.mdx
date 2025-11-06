@@ -5,8 +5,8 @@ description: Protesters invading the National Congress of Brazil
 image:
   url: "../assets/brazil-riots.png"
   alt: "Protesters invading the National Congress of Brazil - By TV BrasilGov, CC BY 3.0, https://commons.wikimedia.org/w/index.php?curid=127781054"
-pubDate: 2025-08-17
-tags: ["astro", "tailwindcss", "daisyui"]
+pubDate: 2025-11-06
+tags: ["data-analytics", "python", "altair", "polars"]
 ---
 import Chart from '../components/Chart.astro'
 import ModalGallery from '../components/ModalGallery.astro'
@@ -28,68 +28,278 @@ newly sworn in government. Bolsonaro was convicted of attempting to overthrow th
 Using reported incidents taken from the Armed Conflict Location & Event Data [(ACLED)](acleddata.com) site, we see that from January of 2022 to January of 2024
 they have aggregated reports of 17,148 total incidents of civil disturbance, including protests,
 riots, and acts of state violence against civilians. We can see increases that correspond to several key events:
+
+<Chart id='line' spec='/charts/brazil_project/line-incidents_2022-2024.json'/>
+
 * In August, Bolsonaro stated that
  he and his supporters "must obliterate" the opposition Workers' Party,
 leading to Amnesty International stating that there was at least one case of political violence every day, with 88% occurring in September.
 * October 2nd, the day of the first round of elections
 * The large spike in November, representing the public contesting of the elections
-* Finally January when the protestors attempted to unseat the government. 
+* Finally January when the protestors attempted to unseat the government.
 
-<Chart id='line' spec='/charts/brazil_project/line-incidents_2022-2024.json'/>
-
+### Political Unrest by State
 This gives an average of 635 per state, however we can see outliers in several states:
 
 <Chart id='bar' spec='/charts/brazil_project/bar-incidents_of_violence_by_state.json'/>
-<RenderCharts ids={['bar', 'line']} client:load/>
+
+Click below to see the distribution of incidents across the nation over the period and the states that voted most heavily for Bolsonaro.
 
 <ModalGallery
   id="chart-gallery"
-  titles={["View Map"]}
-  charts={["/charts/brazil_project/map_by_state.json"]}
+  titles={["View Maps"]}
+  charts={["/charts/brazil_project/map_by_state.json", "/charts/brazil_project/map_bolsonaro-results.json"]}
 />
 
-### Tailwind and Daisy
-I've gotten used to reaching for [Shadcn](https://ui.shadcn.com) once again locking me into [React](https://react.dev/). Sticking with the concept of
-framework agnosticism I'm using [Tailwind](http://tailwindcss.com/) for coherent styling and the DAISY component library.
+## Market Reaction to the Unrest
+The Bovespa Index is a benchmark index of the largest Brazilian publically traded companies. We can attempt to gauge how the Brazilian market reacted to the protests by charting the closing prices against incidences of unrest:
 
-### The Blog
-[Astro](https://astro.build) comes with a [content collections](https://docs.astro.build/en/guides/content-collections/) API that essentially
-gives it a built-in headless CMS. It supports writing posts in Markdown or MDX. I've wired it up with a GitHub action so it gets published
-whenever I push the repository, making it really easy to update. Source for this site, including the GitHub workflow can be found
-[here](https://github.com/SMcLeaish/astro-blog).
+<Chart id='stonks' spec='/charts/brazil_project/market_vs_incidents.json' />
 
-[Tailwind](http://tailwindcss.com/) has a nice plugin for styling text called [typography](https://v1.tailwindcss.com/docs/typography-plugin) that works great with
-Markdown. It really simplifies styling free-text.
+There is possibly evidence of a market downturn corresponding to the spikes in unrest in November and January, with a market rebound seeming to take place around April of 2023.
 
-I've been using [Helix](http://helix-editor.com/) as my text editor for the last couple of months, and I'll probably do a post on it in the future, because it rocks.
-While not limited to [Helix](http://helix-editor.com/), while building this site I found [ltex-ls-plus](https://github.com/ltex-plus/ltex-ls-plus), a language server that
-adds grammar and spell-checking to your Markdown editor. Integrating it into [Helix](http://helix-editor.com/) was very easy using the reference [Helix](http://helix-editor.com/) maintains on their
-[Language Server Configurations](https://github.com/helix-editor/helix/wiki/Language-Server-Configurations) page.
+### Min-Max normalization
 
-### Why Blogging?
-It feels weird blogging in 2025. I'm not great about taking notes, and I have a bad tendency to jump between projects.
-I'm hoping that trying to publish something occasionally as I'm going along will help with both of those problems. If anyone happens along
-and is working on the same things as me all the better.
+To get a better look at how the data might correlate we can use [Rescaling (min-max normalization)](https://en.wikipedia.org/wiki/Feature_scaling#Rescaling_(min-max_normalization)) which scales the data to the ratio of change,
+as opposed to trying to compare the raw total values.
 
-### What I'd still like to get working
-* One gripe about the [Astro](https://astro.build) [content collections](https://docs.astro.build/en/guides/content-collections/)
-is it doesn't have a built-in way to do post excerpts, so right now my main page displays the description from the front matter. I've seen
-some ways to work around this, but I'm going to get to that later.
+<Chart id='norm' spec='/charts/brazil_project/m-v-i-norm.json' />
 
-* I'd like to have a table of contents for my posts. I wanted to get this site up and running, perfect is the enemy of good, so I'll get to
-that later as well.
+## Findings
+Without drawing conclusions about causation, there are some correlations that appeared.
 
-* A search bar is definitely something that I'll want to implement at some point.
+* First, and most intuitive, the spikes in incidences of political unrest correspond to either major election events or direct calls from Bolsonaro to his supporters to engage in protest and or violence.
+* The incidences were highest in states where Bolsonaro received the lowest percentage of the overall total votes.
+* The Brazilian stock market trended downward corresponding to the increase in political unrest.
 
-* Pagination. Similar to the search bar, it'll make sense when I've got more posts.
+## Avenues for Further Analysis
+Some other questions that I have at the conclusion of this project that might provide further insights:
 
-So, on the to-do list:
+### Socio-Economic Factors
+* How might have socio-econmic factors have played a role in the protests?
+* Did a participant's income or education play a factor in participation in protests?
+* Does that correspond neatly to the party that they voted for, or is the correlation more geographically relevant?
+### Industrialization Factors
+* Were protests and voting tendencies correlated strongly with levels of industrialization?
+* Did Brazilian's with similar incomes from areas with divergent levels of manufacturing economy participate in the protests in the same way?
+ 
+### Foreign Investment Impact
+* What effect, if any, did this period of political unrest have on foreign investment into the nation?
+## Technical Notes
 
-- [ ] Excerpts
-- [x] Table of Contents
-- [ ] Searching
-- [ ] Pagination
+### Data Sources
+* [ACLED](https://acleddata.com) data was used for reports of unrest.
+* [github.com/giuliano-macedo](https://github.com/giuliano-macedo/geodata-br-states?tab=readme-ov-file) repository used for geojson state boundaries.
+* [Bovespa Index](https://www.marketwatch.com/investing/index/bvsp?countrycode=br&mod=mw_quote_tab) market data from [MarketWatch](https://www.marketwatch.com/)
+* Election data from Brazil's [Tribunal Superior Eleitoral (TSE)](https://dadosabertos.tse.jus.br/no/dataset/resultados-2022)
 
-I'll update this page as I get them working. 
+### Libraries Used
 
+Analysis was done using [polars](https://pola.rs/) and visualization using [altair](https://altair-viz.github.io/)
 
+### Classes
+During the project I wrote some classes and utility functions that I'll add for reference and sharing:
+
+This class joins ACLED data on a geojson file:
+```py
+from dataclasses import dataclass, field
+import json
+import polars as pl
+import altair as alt
+from utils import clean_column
+
+@dataclass
+class AcledData: 
+    feature_key: str = 'features'
+    property_keys: list[str] = field(default_factory=lambda: ['SIGLA', 'Estado', 'Total'])
+    acled_csv: str = 'data/acled_data_br_2022-2024.csv'
+    join_columns: tuple[str,str] = ('admin1', 'Estado')
+    geojson_id: str = 'SIGLA'
+    geojson_file: str | None = 'data/br_states.json'
+    geojson: dict = field(default_factory=dict)
+
+    def __post_init__(self):
+        self._build_acled_df()
+        if self.geojson_file is not None:
+            self._load_geojson()
+            self._build_geo_df() 
+
+    def _load_geojson(self) -> None:
+        if self.geojson_file is None:
+            return
+        with open(self.geojson_file, 'r', encoding='utf-8') as f:
+            self.geojson = json.load(f)
+
+    def _build_geo_df(self) -> None:
+        if self.geojson_file is None:
+            return
+        features = self.geojson[self.feature_key]
+        records = []
+        for feature in features:
+            props = feature.get('properties', {})
+            record = {k: props.get(k) for k in self.property_keys}
+            record['geometry_type'] = feature['geometry']['type']
+            records.append(record)
+        self.geo_df = pl.DataFrame(records)
+
+    def _build_acled_df(self) -> None:
+        self.acled_df = pl.read_csv(self.acled_csv)
+
+    def join_on_geojson_id(self) -> pl.DataFrame:
+        left, right = self.join_columns
+        acled_clean = clean_column(self.acled_df, left, f"{left}_clean")
+        geo_clean = clean_column(self.geo_df, right, f"{right}_clean")
+        return acled_clean.join(
+            geo_clean.select([self.geojson_id, f"{right}_clean"]),
+            left_on=f"{left}_clean",
+            right_on=f"{right}_clean",
+            how='left'
+        )
+```
+A utility for removing accent marks from state names:
+```py
+import unicodedata
+import polars as pl
+
+def strip_accents(text: str) -> str:
+    return ''.join(
+        c for c in unicodedata.normalize('NFKD', text)
+        if not unicodedata.combining(c)
+    )
+
+def clean_column(df: pl.DataFrame, col: str, alias: str|None) -> pl.DataFrame:
+        alias = alias or col
+        return df.with_columns(
+            pl.col(col).map_elements(
+            strip_accents,
+            return_dtype=pl.Utf8)
+            .str.strip_chars()
+            .str.to_lowercase()
+            .alias(alias))
+```
+
+And a class for creating choropleth maps with altair:
+
+```py
+from dataclasses import dataclass, field
+from typing import Literal, Mapping
+import altair as alt
+import polars as pl
+
+@dataclass
+class Choropleth:
+    lookup_df: pl.DataFrame
+    lookup_column: str
+    geojson: dict = field(default_factory=dict)
+    geojson_id: str = 'SIGLA'
+    feature_key: str = 'features'
+    theme: str = 'dark'
+    points: alt.Chart | None = None
+    point_labels: alt.Chart | None = None
+    basemap: alt.Chart | None = None
+    points_df: pl.DataFrame | None = None
+    points_marker_size: int = 50
+    points_marker_color: Literal['black', 'crimson'] = 'crimson'
+    points_label_column: str | None = None
+    points_label_align: Literal['center','left','right'] = 'right'
+    points_label_x_offset: int = -6
+    points_label_y_offset: int = -2
+    points_label_font_size: int = 12
+    points_label_font_weight: Literal['normal', 'bold','lighter'] = 'bold'
+    points_label_text_color: str = 'black'
+    points_label_color: str = 'crimson'
+    points_lat_column: str = 'lat'
+    points_lng_column: str = 'lng'
+    basemap_stroke_color: Literal['white', 'black'] = 'white'
+    basemap_stroke_width: float = 0.5
+    basemap_color_column: str = 'incident_count'
+    basemap_color_scheme: Literal['reds', 'blueorange']= 'blueorange'
+    basemap_tooltips: Mapping[str, str] | None = field(default_factory=lambda: 
+                                                {'properties.Estado': 'State',
+                                           'incident_count': 'Incidents'})
+    width: int = 600
+    height: int = 600
+    title: str = 'Total Incidents of Political Unrest 2022-2024'
+    projection: Literal['mercator'] = 'mercator'
+    def _build_points(self) -> None | alt.Chart:
+        if self.points_df is None:
+            return None
+        return (alt.Chart(self.points_df)
+            .mark_circle(
+                size=self.points_marker_size,
+                color=self.points_marker_color)
+            .encode(
+                longitude=f"{self.points_lng_column}:Q",
+                latitude=f"{self.points_lat_column}:Q",
+                tooltip=[f"{self.points_label_column}:N"]
+                )
+        )
+
+    def _build_point_labels(self) -> None | alt.Chart:
+        if self.points_df is None or self.points_label_column is None:
+            return None
+        return (alt.Chart(self.points_df)
+            .mark_text(
+                align=self.points_label_align,
+                dx=self.points_label_x_offset,  
+                dy=self.points_label_y_offset, 
+                fontSize=self.points_label_font_size,
+                fontWeight=self.points_label_font_weight,
+                color=self.points_label_text_color,
+                stroke='grey',
+                strokeWidth=.5
+            )
+            .encode(
+                longitude=f"{self.points_lng_column}:Q",
+                latitude=f"{self.points_lat_column}:Q", 
+                text=f"{self.points_label_column}:N")
+            )
+    def _build_tooltips(self) -> None:
+        self.processed_tooltips = [
+            alt.Tooltip(field=field, title=title)
+            for field, title in self.basemap_tooltips.items()
+        ]
+    def _build_base_map(self) -> alt.Chart:
+        return(
+            alt.Chart(
+                alt.Data(
+                    values=self.geojson[self.feature_key]
+                ))
+                .mark_geoshape(
+                    stroke=self.basemap_stroke_color,
+                    strokeWidth=self.basemap_stroke_width
+                )
+                .encode(
+                    color=alt.Color(f"{self.basemap_color_column}:Q",
+                    scale=alt.Scale(scheme=self.basemap_color_scheme)),
+                    tooltip=self.processed_tooltips
+                )
+                .transform_lookup(
+                    lookup=f"properties.{self.geojson_id}",
+                    from_=alt.LookupData(self.lookup_df,
+                                         self.geojson_id,
+                                         [self.lookup_column])
+                )
+                .properties(width=self.width,
+                            height=self.height,
+                            title=self.title
+                )
+                .project(type=self.projection)
+        )
+    def as_chart(self) -> alt.Chart | alt.LayerChart| None:
+        if self.basemap_tooltips is not None:
+            self._build_tooltips()
+        self.basemap = self._build_base_map()
+        if self.points_df is None or self.points_label_column is None and self.basemap:
+            return self.basemap
+        self.points = self._build_points()
+        self.point_labels = self._build_point_labels()
+        if self.basemap and self.points and self.point_labels: 
+            return self.basemap + self.points + self.point_labels
+        return None
+```
+
+### GitHub Repository
+Code used to generate these visualizations can be found in my GitHub [Brazil Unrest Data](https://github.com/SMcLeaish/brazil-unrest-data)
+
+<RenderCharts ids={['bar', 'line', 'stonks', 'norm']} client:load/>
