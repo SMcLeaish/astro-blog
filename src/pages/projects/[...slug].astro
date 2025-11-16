@@ -35,14 +35,6 @@ const { Content, headings } = await render(post);
         <p class="mb-4">{post.data.description}</p>
         <Content />
       </Prose>
-
-      <div class="tags flex-wrap mt-8">
-        {post.data.tags.map((tag: string) => (
-          <button class="btn btn-sm text-secondary m-2">
-            <a href={`/tags/${tag}`}>{tag}</a>
-          </button>
-        ))}
-      </div>
     </article>
   </div>
 </BaseLayout>
